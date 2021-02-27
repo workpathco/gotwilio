@@ -41,6 +41,8 @@ type ProxyService struct {
 		ShortCodes   string `json:"short_codes"`
 		Sessions     string `json:"sessions"`
 	} `json:"links"`
+
+	twilio *Twilio
 }
 
 // Create a new Twilio Service
@@ -69,6 +71,10 @@ func (twilio *Twilio) NewProxyService(service ProxyServiceRequest) (response *Pr
 	}
 
 	response = new(ProxyService)
+
+	// Pass connection
+	response.twilio = twilio
+
 	err = json.Unmarshal(responseBody, response)
 	return response, exception, err
 
@@ -99,6 +105,10 @@ func (twilio *Twilio) GetProxyService(sid string) (response *ProxyService, excep
 	}
 
 	response = new(ProxyService)
+
+	// Pass connection
+	response.twilio = twilio
+
 	err = json.Unmarshal(responseBody, response)
 	return response, exception, err
 
@@ -129,6 +139,10 @@ func (twilio *Twilio) UpdateProxyService(sid string, service ProxyServiceRequest
 	}
 
 	response = new(ProxyService)
+
+	// Pass connection
+	response.twilio = twilio
+
 	err = json.Unmarshal(responseBody, response)
 	return response, exception, err
 
